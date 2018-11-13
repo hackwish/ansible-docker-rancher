@@ -1,0 +1,12 @@
+# - name: Install Docker package
+#   apt:
+#       name={{ docker_package }}
+#       update_cache=yes
+
+
+- name: Install Docker compatible version
+  shell: curl https://releases.rancher.com/install-docker/17.03.sh | sh
+  args:
+    warn: false
+  register: docker_installed
+  tags: docker
