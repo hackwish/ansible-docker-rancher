@@ -5,3 +5,9 @@
 
 - name: stop docker
   service: "name=docker state={{ docker_stop_handler_state }}"
+
+- name: reload systemd
+#  sudo: yes
+  command: systemctl daemon-reload
+
+- meta: flush_handlers
