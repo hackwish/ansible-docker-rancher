@@ -10,3 +10,5 @@
     warn: false
   register: docker_installed
   tags: docker
+  delay: 10
+  ignore_errors: true
