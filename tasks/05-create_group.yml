@@ -34,7 +34,7 @@
       mode=0644
       owner=root
       group=root
-  notify: stop docker
+#  notify: stop docker
 
 - name: Override Docker config
   template:
@@ -43,7 +43,7 @@
       mode=0644
       owner=root
       group=root
-  notify: stop docker
+#  notify: stop docker
 
 - name: Configure Docker Images Path
   template:
