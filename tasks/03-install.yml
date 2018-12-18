@@ -49,3 +49,6 @@
   tags: docker
   delay: 10
   ignore_errors: true
+
+- name: make sure docker is running
+  service: name=docker state=started enabled=true
