@@ -1,8 +1,9 @@
 ---
-- name: Install Docker compatible version
-  shell: curl https://releases.rancher.com/install-docker/17.03.sh | sh
-  args:
-    warn: false
+- name: Install Docker package
+  apt:
+      name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
+      update_cache: yes
+
   register: docker_installed
   tags: docker
   delay: 10

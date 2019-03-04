@@ -1,9 +1,12 @@
 ---
 # defaults file for docker
 # Edition can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+path_to_ssh_pub_key: "{{ lookup('env','HOME') }}/.ssh/id_rsa.pub"
+
 docker_edition: 'ce'
-docker_package: "docker-{{ docker_edition }}"
 docker_version: '{{ DOCKER_PKG_VERSION }}'
+docker_num_version: "17.03.2"
+docker_package: "docker-{{ docker_edition }}"
 docker_package_state: present
 
 # Service options.

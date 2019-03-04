@@ -4,6 +4,8 @@
     name: "{{ packages }}"
   vars:
     packages:
+      - python 
+      - python-simplejson
       - python-dev
       - python-setuptools
       - python-pip
