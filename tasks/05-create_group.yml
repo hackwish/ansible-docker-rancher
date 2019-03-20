@@ -31,7 +31,9 @@
       mode=0644
       owner=root
       group=root
-#  notify: stop docker
+  notify: 
+    - reload systemd
+    - restart docker
 
 - name: Override Docker config
   template:
@@ -40,7 +42,9 @@
       mode=0644
       owner=root
       group=root
-#  notify: stop docker
+  notify: 
+    - reload systemd
+    - restart docker
 
 - name: Configure Docker Images Path
   template:

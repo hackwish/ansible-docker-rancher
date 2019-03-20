@@ -1,11 +1,12 @@
 ---
 - name: Install Docker package
   apt:
-      name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
+      #name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}~3-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
+      name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}~3-0~{{ ansible_distribution | lower }}"
       update_cache: yes
 
   register: docker_installed
   tags: docker
   delay: 10
-  ignore_errors: true
-
+  ignore_errors: false
+  
