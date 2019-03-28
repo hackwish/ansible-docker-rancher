@@ -1,12 +1,20 @@
 ---
-- name: Install Docker package
+- name: Install Docker package RANCHER V1
   apt:
-      #name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}~3-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
-      name: "{{ docker_package }}={{ docker_num_version }}~{{ docker_edition }}~3-0~{{ ansible_distribution | lower }}"
+      name: "{{ docker_package }}={{ docker_num_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
       update_cache: yes
-
   register: docker_installed
   tags: docker
   delay: 10
   ignore_errors: false
-  
+  when: RANCHER_VERSION == 1
+
+- name: Install Docker package RANCHER V2
+  apt:
+      name: "{{ docker_package }}={{ docker_num_version }}-0~{{ ansible_distribution | lower }}"
+      update_cache: yes
+  register: docker_installed
+  tags: docker
+  delay: 10
+  ignore_errors: false
+  when: RANCHER_VERSION == 2

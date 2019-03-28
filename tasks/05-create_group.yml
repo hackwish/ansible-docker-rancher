@@ -31,9 +31,9 @@
       mode=0644
       owner=root
       group=root
-  notify: 
-    - reload systemd
-    - restart docker
+  # notify: 
+  #   - reload systemd
+  #   - restart docker
 
 - name: Override Docker config
   template:
@@ -42,9 +42,9 @@
       mode=0644
       owner=root
       group=root
-  notify: 
-    - reload systemd
-    - restart docker
+  # notify: 
+  #   - reload systemd
+  #   - restart docker
 
 - name: Configure Docker Images Path
   template:
@@ -56,3 +56,5 @@
   notify: 
     - reload systemd
     - restart docker
+
+- meta: flush_handlers
