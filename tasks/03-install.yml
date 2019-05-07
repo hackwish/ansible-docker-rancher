@@ -1,15 +1,23 @@
 ---
-- name: Install Docker package RANCHER V1
-  apt:
-      name: "{{ docker_package }}={{ docker_num_version }}-0~{{ ansible_distribution | lower }}-{{ ansible_lsb.codename }}"
-      update_cache: yes
-  register: docker_installed
-  tags: docker
-  delay: 10
-  ignore_errors: false
-  when: RANCHER_VERSION == 1
+- name: Check docker is installed
+  shell: dpkg --get-selections | grep docker-ce
+  register: docker_check_installed
+  changed_when: false
+  failed_when: false
 
-- name: Install Docker package RANCHER V2
+# - name: Install Docker package RANCHER V1
+#   apt:
+#       name: "{{ docker_package }}={{ docker_num_version }}-0~{{ ansible_distribution | lower }}"
+#       update_cache: yes
+#   register: docker_installed
+#   tags: docker
+#   delay: 10
+#   ignore_errors: false
+#   when:
+#     - RANCHER_VERSION == 1
+#     - docker_check_installed.rc == 1
+
+- name: Install Docker package RANCHER
   apt:
       name: "{{ docker_package }}={{ docker_num_version }}-0~{{ ansible_distribution | lower }}"
       update_cache: yes
@@ -17,4 +25,14 @@
   tags: docker
   delay: 10
   ignore_errors: false
-  when: RANCHER_VERSION == 2
+  when:
+    # - RANCHER_VERSION == 2
+    - docker_check_installed.rc == 1
+
+# Prevent docker-ce from being upgraded.
+- name: Prevent docker-ce from being upgraded
+  dpkg_selections:
+    name: docker-ce
+    selection: hold
+  ignore_errors: false
+#  when: docker_installed is succeeded docker_installed is changed
